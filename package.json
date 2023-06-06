@@ -1,0 +1,66 @@
+{
+  "name": "go-to-test",
+  "displayName": "go-to-test",
+  "description": "The Go-To-Test extension for Visual Studio Code simplifies the process of navigating between code files and their associated test files. With just a click or a keyboard shortcut, you can quickly jump from a source file to its test file or vice versa, streamlining your development and testing workflow.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Find test file",
+      "properties": {
+        "goToTest.specFilePatterns": {
+          "type": "array",
+          "title": "Patterns of spec file names",
+          "default": [
+            "{f}.spec{e}",
+            "{f}.test{e}",
+            "{f}-spec{e}",
+            "{f}-test{e}",
+            "{f}_spec{e}",
+            "{f}_test{e}"
+          ],
+          "description": "{f} will be replaced by file name and {e} by file extension",
+          "items": {
+            "type": "string",
+            "title": "Spec file name"
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.findTestFile",
+        "title": "findTestFile"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.78.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  }
+}
